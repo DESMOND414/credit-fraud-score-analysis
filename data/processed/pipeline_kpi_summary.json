@@ -1,0 +1,18 @@
+{
+  "total_customers": 5000,
+  "total_transactions": 60000,
+  "total_spend_gbp": 6020792.38,
+  "total_fraud_txns": 2889,
+  "overall_fraud_rate_pct": 4.81,
+  "gross_fraud_exposure_gbp": 1198644.97,
+  "confirmed_net_loss_gbp": 515115.18,
+  "avg_credit_score": 705.0,
+  "avg_utilisation_pct": 38.04,
+  "avg_delinquency_rate_pct": 6.47,
+  "avg_location_consistency": 70.73,
+  "risk_tier_distribution": {
+    "Low Risk": 2512,
+    "Medium Risk": 1268,
+    "High Risk": 1220
+  }
+}

@@ -1,0 +1,97 @@
+// =============================================================================
+// Credit Fraud Trends & Credit Score Analysis
+// Power BI DAX Measures & Smart Narrative Definitions
+// =============================================================================
+
+// 1. Core Transaction & Spend KPIs
+Total Card Spend (£) = 
+SUM('transactions_enriched'[amount_gbp])
+
+Total Transactions = 
+COUNTROWS('transactions_enriched')
+
+Average Ticket Size (£) = 
+DIVIDE([Total Card Spend (£)], [Total Transactions], 0)
+
+// 2. Fraud Tracking & Loss Recovery Measures
+Fraud Transaction Count = 
+CALCULATE(
+    COUNTROWS('transactions_enriched'),
+    'transactions_enriched'[is_fraud] = 1
+)
+
+Fraud Incidence Rate (%) = 
+DIVIDE([Fraud Transaction Count], [Total Transactions], 0) * 100
+
+Gross Fraud Exposure (£) = 
+CALCULATE(
+    SUM('transactions_enriched'[amount_gbp]),
+    'transactions_enriched'[is_fraud] = 1
+)
+
+Confirmed Net Fraud Loss (£) = 
+SUM('transactions_enriched'[confirmed_loss_gbp])
+
+Prevented Fraud Savings (£) = 
+[Gross Fraud Exposure (£)] - [Confirmed Net Fraud Loss (£)]
+
+Fraud Prevention Efficiency (%) = 
+DIVIDE([Prevented Fraud Savings (£)], [Gross Fraud Exposure (£)], 0) * 100
+
+// 3. Time-Series Velocity & MoM Trend Measures
+Prior Month Fraud Exposure (£) = 
+CALCULATE(
+    [Gross Fraud Exposure (£)],
+    DATEADD('Calendar'[Date], -1, MONTH)
+)
+
+MoM Fraud Velocity Change (%) = 
+DIVIDE(
+    [Gross Fraud Exposure (£)] - [Prior Month Fraud Exposure (£)],
+    [Prior Month Fraud Exposure (£)],
+    0
+) * 100
+
+// 4. Credit Score, Utilisation & Delinquency Risk Measures
+Portfolio Avg Credit Score = 
+AVERAGE('customer_risk_profiles'[credit_score])
+
+Avg Credit Utilisation (%) = 
+AVERAGE('customer_risk_profiles'[credit_utilisation_pct])
+
+Avg Delinquency Rate (%) = 
+AVERAGE('customer_risk_profiles'[delinquency_rate_pct])
+
+Avg Location Consistency Score = 
+AVERAGE('customer_risk_profiles'[location_consistency_score])
+
+High Risk Customer Count = 
+CALCULATE(
+    COUNTROWS('customer_risk_profiles'),
+    'customer_risk_profiles'[credit_risk_tier] = "High Risk"
+)
+
+High Risk Portfolio Share (%) = 
+DIVIDE(
+    [High Risk Customer Count],
+    COUNTROWS('customer_risk_profiles'),
+    0
+) * 100
+
+// 5. Dynamic Risk Alert & Executive Smart Narrative
+Risk Tier KPI Alert Banner = 
+VAR HighRiskFraudShare = 
+    DIVIDE(
+        CALCULATE([Gross Fraud Exposure (£)], 'customer_risk_profiles'[credit_risk_tier] = "High Risk"),
+        [Gross Fraud Exposure (£)],
+        0
+    ) * 100
+VAR AvgScore = ROUND([Portfolio Avg Credit Score], 0)
+VAR FraudRate = ROUND([Fraud Incidence Rate (%)], 2)
+RETURN
+    "PORTFOLIO RISK SUMMARY: Mean Credit Score stands at " & AvgScore & 
+    " with an overall Fraud Incidence Rate of " & FraudRate & "%. " &
+    "High-Risk credit tier accounts drive " & ROUND(HighRiskFraudShare, 1) & 
+    "% of gross fraud exposure (£" & FORMAT([Gross Fraud Exposure (£)], "#,##0") & 
+    "), while real-time rules prevented £" & FORMAT([Prevented Fraud Savings (£)], "#,##0") & 
+    " (" & ROUND([Fraud Prevention Efficiency (%)], 1) & "% interception rate)."
