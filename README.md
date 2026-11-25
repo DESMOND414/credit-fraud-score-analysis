@@ -5,6 +5,35 @@
 
 ---
 
+## About the Project
+
+**Credit Fraud Trends & Credit Score Analysis** is an end-to-end financial analytics and risk monitoring project designed to simulate how retail banking and card-issuing risk teams evaluate portfolio health, segment customer creditworthiness, and detect fraudulent transaction patterns.
+
+Financial institutions face two tightly linked operational challenges: managing **credit default risk** (driven by rising credit utilisation and payment delinquencies) and mitigating **card fraud exposure** (driven by Card-Not-Present attacks, account takeovers, and cross-border velocity spikes). This project bridges both domains in a single relational and analytical pipeline—unifying customer demographics, account balances, credit bureau histories, card transactions, and fraud records into actionable executive dashboards.
+
+---
+
+## Project Details
+
+- **Domain:** Retail Banking, Credit Risk Analytics & Payment Fraud Monitoring
+- **Dataset & Portfolio Scale:**
+  - **5,000** customer accounts across **15 UK cities**
+  - **60,000** timestamped card transactions totalling **£6.02M** in spend
+  - **2,889** flagged fraud events (**4.81%** incidence rate) representing **£1.20M** in gross fraud exposure, with **£683.5K** prevented and **£515.1K** confirmed net loss
+  - Normalised **5-table relational database** (`customers`, `accounts`, `credit_history`, `transactions`, `fraud_records`)
+- **Core Capabilities:**
+  - **Holistic Financial Profiling (SQL):** Multi-table joins combining bureau scores, revolving balances, delinquency buckets, and transaction behaviour.
+  - **Behavioural Feature Engineering (Python):** Automated computation of Credit Utilisation Ratio (%), Delinquency Rate (%), Spending Velocity, and Haversine-based Location Consistency Scores (0–100).
+  - **Credit Risk Segmentation:** Portfolio-wide classification into **Low Risk**, **Medium Risk**, and **High Risk** behavioural tiers.
+  - **Spatial & Temporal Fraud Analytics:** UK city-level fraud heatmaps, distance-from-home anomaly analysis, and monthly fraud velocity / loss recovery tracking.
+  - **Executive BI & Interactive Reporting:** Power BI data model (`Power Query M` + `DAX` measures), publication-ready visual snapshots, and a self-contained interactive Plotly HTML dashboard.
+- **Tech Stack:**
+  - **Database & Querying:** MySQL / SQLAlchemy (with local SQLite mirror support)
+  - **Data Engineering & Analytics:** Python (`Pandas`, `NumPy`, `SQLAlchemy`)
+  - **Visualisation & BI:** Power BI (`Power Query`, `DAX`), Plotly, Matplotlib/Seaborn
+
+---
+
 ## Executive Objective
 
 To evaluate customer credit histories and card transactions across relational financial tables, extract holistic financial profiles, segment customers into behavioural credit risk tiers (**Low**, **Medium**, **High**), and track fraudulent transaction trends across geography and time.
