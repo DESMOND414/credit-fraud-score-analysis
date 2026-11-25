@@ -7,9 +7,9 @@
 
 ## About the Project
 
-**Credit Fraud Trends & Credit Score Analysis** is an end-to-end financial analytics and risk monitoring project designed to simulate how retail banking and card-issuing risk teams evaluate portfolio health, segment customer creditworthiness, and detect fraudulent transaction patterns.
+**Credit Fraud Trends & Credit Score Analysis** is an end-to-end financial analytics and risk monitoring project designed to simulate how retail banking and card issuing risk teams evaluate portfolio health, segment customer creditworthiness, and detect fraudulent transaction patterns.
 
-Financial institutions face two tightly linked operational challenges: managing **credit default risk** (driven by rising credit utilisation and payment delinquencies) and mitigating **card fraud exposure** (driven by Card-Not-Present attacks, account takeovers, and cross-border velocity spikes). This project bridges both domains in a single relational and analytical pipeline—unifying customer demographics, account balances, credit bureau histories, card transactions, and fraud records into actionable executive dashboards.
+Financial institutions face two tightly linked operational challenges: managing **credit default risk** (driven by rising credit utilisation and payment delinquencies) and mitigating **card fraud exposure** (driven by Card-Not-Present attacks, account takeovers, and cross-border velocity spikes). This project bridges both domains in a single relational and analytical pipeline unifying customer demographics, account balances, credit bureau histories, card transactions, and fraud records into actionable executive dashboards.
 
 ---
 
